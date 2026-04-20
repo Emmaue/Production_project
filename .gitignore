@@ -2,6 +2,7 @@
 .env
 .dbt/
 profiles.yml
+docker/postgres_data/
 
 # Python
 __pycache__/

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # One Postgres container, two separate purposes
+  production_db:
+    image: postgres:17
+    container_name: production_db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=airflow_metadata  # Airflow will use this
+    ports:
+      - "5433:5432" 
+    volumes:
+      - ./docker/postgres_data:/var/lib/postgresql/data
+
+  airflow:
+    image: apache/airflow:2.7.1-python3.9
+    container_name: airflow_runner
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      # Airflow connects to the 'airflow_metadata' DB in the container
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://admin:password@production_db:5432/airflow_metadata
+    volumes:
+      - ./dags:/opt/airflow/dags
+    ports:
+      - "8080:8080"
+    command: standalone

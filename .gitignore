@@ -1,0 +1,19 @@
+# Credentials and Environment
+.env
+.dbt/
+profiles.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# dbt
+dbt_packages/
+target/
+
+# IDE
+.vscode/
+.idea/

@@ -3,6 +3,7 @@
 .dbt/
 profiles.yml
 docker/postgres_data/
+.user.yml
 
 # Python
 __pycache__/
@@ -12,8 +13,10 @@ venv/
 .venv/
 
 # dbt
-dbt_packages/
-target/
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+logs/
 
 # IDE
 .vscode/
